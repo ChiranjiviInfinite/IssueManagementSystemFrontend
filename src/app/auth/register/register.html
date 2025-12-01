@@ -1,0 +1,100 @@
+<div class="register-container">
+  <h2>Create Account</h2>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="register-form">
+
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input 
+        type="text" 
+        id="username" 
+        formControlName="username"
+        placeholder="Enter username"
+      />
+
+      @if (registerForm.get('username')?.touched && registerForm.get('username')?.invalid) {
+        <div class="error">
+          @if (registerForm.get('username')?.errors?.['required']) {
+            <div>Username is required.</div>
+          }
+          @if (registerForm.get('username')?.errors?.['minlength']) {
+            <div>Minimum 3 characters required.</div>
+          }
+          @if (registerForm.get('username')?.errors?.['maxlength']) {
+            <div>Maximum 50 characters allowed.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        id="password" 
+        formControlName="password"
+        placeholder="Enter password"
+      />
+
+      @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
+        <div class="error">
+          @if (registerForm.get('password')?.errors?.['required']) {
+            <div>Password is required.</div>
+          }
+          @if (registerForm.get('password')?.errors?.['minlength']) {
+            <div>At least 6 characters required.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email"
+        placeholder="Enter email"
+      />
+
+      @if (registerForm.get('email')?.touched && registerForm.get('email')?.invalid) {
+        <div class="error">
+          @if (registerForm.get('email')?.errors?.['required']) {
+            <div>Email is required.</div>
+          }
+          @if (registerForm.get('email')?.errors?.['email']) {
+            <div>Enter a valid email.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- SERVER ERROR -->
+    @if (error()) {
+      <div class="error server-error">{{ error() }}</div>
+    }
+
+    <!-- SUCCESS MESSAGE -->
+    @if (success()) {
+      <div class="success">{{ success() }}</div>
+    }
+
+    <!-- SUBMIT BUTTON WITH LOADING -->
+    <button type="submit" [disabled]="registerForm.invalid || loading()">
+      @if (loading()) { 
+        <span>Registering…</span> 
+      }
+      @else { 
+        <span>Register</span> 
+      }
+    </button>
+
+  </form>
+
+  <p class="text-muted">
+    Already have an account? <a routerLink="/">Login</a>
+  </p>
+</div>

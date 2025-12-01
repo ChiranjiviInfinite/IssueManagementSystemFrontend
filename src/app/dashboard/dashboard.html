@@ -1,0 +1,46 @@
+<div class="user-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">IMS User</h2>
+
+    <nav class="menu">
+
+      <!-- Approved Posts -->
+      <a routerLink="/dashboard" 
+         routerLinkActive="active" 
+         [routerLinkActiveOptions]="{ exact: true }" 
+         class="menu-item">
+        ✔ Approved Posts
+      </a>
+
+      <!-- My Posts -->
+      <a routerLink="/dashboard/user-posts" routerLinkActive="active" class="menu-item">
+        📁 My Posts
+      </a>
+
+      <!-- Create Post -->
+      <a routerLink="/dashboard/create-post" routerLinkActive="active" class="menu-item">
+        ➕ Create Post
+      </a>
+
+    </nav>
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <h1>User Dashboard</h1>
+      <div class="user-info">Logged in as User</div>
+    </header>
+
+    <!-- Child routes load here -->
+    <router-outlet></router-outlet>
+
+  </div>
+
+</div>

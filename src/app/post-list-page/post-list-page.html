@@ -1,0 +1,106 @@
+<div class="post-container">
+
+  <!-- Posts Loop -->
+  @for (post of posts(); track post.id) {
+    <div class="post-card">
+
+      <!-- Title -->
+      <h2 class="post-title">{{ post.title }}</h2>
+
+      <!-- Description -->
+      <p class="post-description">{{ post.description }}</p>
+
+      <!-- Info Box -->
+      <div class="info-box">
+        <div class="info-grid">
+
+          <div class="info-item">
+            <label>Post ID</label>
+            <span>#{{ post.id }}</span>
+          </div>
+
+          <div class="info-item">
+            <label>Post Type</label>
+            <span class="badge type">{{ post.type }}</span>
+          </div>
+
+          <div class="info-item">
+            <label>Post Status</label>
+            <span class="badge status status-{{ post.status | lowercase }}">
+              {{ post.status }}
+            </span>
+          </div>
+
+          <div class="info-item">
+            <label>Created By</label>
+            <span>{{ post.createdByUsername }}</span>
+          </div>
+
+          <div class="info-item">
+            <label>Assigned Update</label>
+            <span>{{ post.assignedUpdate || '-' }}</span>
+          </div>
+
+          <div class="info-item">
+            <label>Created At</label>
+            <span>{{ post.createdAt | date:'medium' }}</span>
+          </div>
+
+          <div class="info-item">
+            <label>Updated At</label>
+            <span>{{ post.updatedAt | date:'medium' }}</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Admin Action Buttons -->
+      <div class="actions">
+        <button class="btn approve" (click)="approve(post.id)">Approve</button>
+        <button class="btn reject" (click)="reject(post.id)">Reject</button>
+        <button class="btn close" (click)="close(post.id)">Close</button>
+        <button class="btn update" (click)="openUpdateBox(post)">Assign Update</button>
+
+        <!-- COMMENTS TOGGLE BUTTON -->
+        <button class="btn comments" (click)="toggleComments(post.id)">
+          {{ isCommentsVisible(post.id) ? 'Hide Comments' : 'View Comments' }}
+        </button>
+      </div>
+
+      <!-- COMMENTS SECTION -->
+      @if (isCommentsVisible(post.id)) {
+        <div class="comments-box">
+          <app-comment [postId]="post.id"></app-comment>
+        </div>
+      }
+
+    </div>
+  }
+
+  <!--  UPDATE MODAL -->
+  @if (selectedPost()) {
+    <div class="modal-backdrop">
+      <div class="modal-box">
+
+        <h3>Assign Update to Post #{{ selectedPost()?.id }}</h3>
+        <p class="post-title">{{ selectedPost()?.title }}</p>
+        <p class="post-description">{{ selectedPost()?.description }}</p>
+
+        <textarea
+          [ngModel]="updateText()"
+          (ngModelChange)="updateText.set($event)"
+          rows="4"
+          placeholder="Write update message..."
+          class="update-input">
+        </textarea>
+
+        <div class="modal-actions">
+          <button class="btn save" (click)="saveUpdate()">Save</button>
+          <button class="btn cancel" (click)="cancelUpdate()">Cancel</button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+</div>

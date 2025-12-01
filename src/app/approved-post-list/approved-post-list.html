@@ -1,0 +1,75 @@
+<div class="approved-posts-container">
+
+  @if (loading()) {
+    <div class="loading">Loading approved posts...</div>
+  }
+
+  @if (!loading() && error()) {
+    <div class="error">{{ error() }}</div>
+  }
+
+  @if (!loading() && !error() && posts().length === 0) {
+    <div class="empty">No approved posts available.</div>
+  }
+
+  @if (!loading() && !error() && posts().length > 0) {
+    <div class="posts-list">
+      @for (post of posts(); track post.id) {
+
+        <div class="post-card">
+
+          <!-- Post Header -->
+          <div class="post-header">
+            <div class="post-user">
+              <span class="username">{{ post.createdByUsername }}</span>
+              <span class="post-date">{{ post.createdAt | date:'short' }}</span>
+            </div>
+            <span class="post-id">#{{ post.id }}</span>
+          </div>
+
+          <!-- Post Title -->
+          <h3 class="post-title">{{ post.title }}</h3>
+
+          <!-- Post Description -->
+          <p class="post-description">{{ post.description }}</p>
+
+          <!-- Post Meta -->
+          <div class="post-meta">
+            <span class="meta-item">Type: {{ post.type }}</span>
+            <span class="meta-item" [ngClass]="{
+              'status-approved': post.status === 'APPROVED',
+              'status-pending': post.status === 'PENDING',
+              'status-closed': post.status === 'CLOSED'
+            }">Status: {{ post.status }}</span>
+            @if (post.assignedUpdate) {
+              <span class="meta-item">Update: {{ post.assignedUpdate }}</span>
+            }
+            <span class="meta-item">Updated: {{ post.updatedAt | date:'short' }}</span>
+          </div>
+
+          <!-- Comments Toggle -->
+          <div class="post-actions">
+            <button type="button" (click)="toggleComments(post.id)">
+              @if (isCommentsVisible(post.id)) {
+                <span>Hide Comments</span>
+              }
+              @else {
+                <span>View/Add Comments</span>
+              }
+            </button>
+          </div>
+
+          <!-- Comment Component -->
+          @if (isCommentsVisible(post.id)) {
+            <ng-container>
+              <app-comment [postId]="post.id"></app-comment>
+            </ng-container>
+          }
+
+        </div>
+
+      }
+    </div>
+  }
+
+</div>

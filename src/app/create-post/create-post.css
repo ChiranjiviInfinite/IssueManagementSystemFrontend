@@ -1,0 +1,91 @@
+.create-post-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 22px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.create-post-container h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f1724;
+  margin-bottom: 20px;
+}
+
+.create-post-container form div {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.create-post-container label {
+  font-weight: 700;
+  font-size: 14px;
+  color: #334155;
+}
+
+.create-post-container input,
+.create-post-container textarea,
+.create-post-container select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  font-family: inherit;
+  color: #0f1724;
+}
+
+.create-post-container textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.create-post-container select {
+  background: white;
+  cursor: pointer;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.success {
+  color: #16a34a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.submit-btn {
+  padding: 10px 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #22c55e, #16a34a); /* green gradient */
+  color: white;
+  transition: all 0.15s ease;
+}
+
+.submit-btn:disabled {
+  background: #86efac; /* lighter green for disabled */
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.2);
+}
+
+
+@media (max-width: 768px) {
+  .create-post-container {
+    padding: 16px;
+    margin: 0 10px;
+  }
+}

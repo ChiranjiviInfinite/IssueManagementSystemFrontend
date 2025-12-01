@@ -1,0 +1,49 @@
+<div class="create-post-container">
+  <h2>Create Post</h2>
+
+  <form (ngSubmit)="createPost()">
+
+    <!-- Title -->
+    <div>
+      <label>Title *</label>
+      <input type="text" [(ngModel)]="title" name="title" required />
+    </div>
+
+    <!-- Description -->
+    <div>
+      <label>Description</label>
+      <textarea [(ngModel)]="description" name="description"></textarea>
+    </div>
+
+    <!-- Post Type -->
+    <div>
+      <label>Post Type *</label>
+      <select [(ngModel)]="type" name="type" required>
+        <option [ngValue]="null">Select Type</option>
+        <option *ngFor="let t of postTypes" [ngValue]="t">{{ t }}</option>
+      </select>
+    </div>
+
+    <!-- Loading Message -->
+     @if(loading()){
+    <div >Creating post...</div>
+     }
+
+    <!-- Error Message -->
+    @if (error()) {
+      <div class="error">{{ error() }}</div>
+    }
+
+    <!-- Success Message -->
+    @if (success()) {
+      <div class="success">{{ success() }}</div>
+    }
+
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-btn" [disabled]="loading()">
+      <span>Submit Post</span>
+    </button>
+
+  </form>
+</div>

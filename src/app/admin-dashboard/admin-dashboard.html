@@ -1,0 +1,33 @@
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">IMS Admin</h2>
+
+<nav class="menu">
+  <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="menu-item">
+    Dashboard
+  </a>
+  <a routerLink="/admin/create-post" routerLinkActive="active" class="menu-item">
+    ➕ Create Post
+  </a>
+</nav>
+
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <h1>Admin Dashboard</h1>
+      <div class="admin-info">Logged in as Admin</div>
+    </header>
+
+    <!-- Child pages load here -->
+    <router-outlet></router-outlet>
+
+  </div>
+</div>
