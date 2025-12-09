@@ -10,7 +10,7 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
   const payload = auth.getPayload();
 
   if (payload) {
-    const userRole = (auth.getPayload()?.roles?.[0] || 'USER').toUpperCase();
+    const userRole = (auth.getPayload()?.roles?.[0] || 'ROLE_USER').toUpperCase();
         
       // redirect based on role
       if (userRole === 'ROLE_ADMIN') {

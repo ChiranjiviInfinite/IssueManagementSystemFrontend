@@ -41,15 +41,6 @@ export class AuthInterceptor implements HttpInterceptor {
       ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
       : req;
 
-    // --- HANDLE 401 RESPONSES ---
-    return next.handle(authReq).pipe(
-      catchError((err: HttpErrorResponse) => {
-        if (err.status === 401) {
-          console.warn('Unauthorized (invalid token or server secret changed). Logging out...');
-          this.auth.logout();
-        }
-        return throwError(() => err);
-      })
-    );
+    return next.handle(authReq);
   }
 }

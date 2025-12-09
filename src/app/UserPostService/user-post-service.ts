@@ -16,7 +16,7 @@ export class UserPostService {
 
   
   createPost(body: PostRequest): Observable<PostResponse> {
-    return this.http.post<PostResponse>(this.baseUrl, body, { withCredentials: true })
+    return this.http.post<PostResponse>(this.baseUrl, body)
       .pipe(
         catchError(this.handleError)
       );
@@ -27,7 +27,7 @@ export class UserPostService {
    * GET /api/posts/approved
    */
   getApprovedPosts(): Observable<PostResponse[]> {
-    return this.http.get<PostResponse[]>(`${this.baseUrl}/approved`, { withCredentials: true })
+    return this.http.get<PostResponse[]>(`${this.baseUrl}/approved`)
       .pipe(
         catchError(this.handleError)
       );
@@ -38,14 +38,14 @@ export class UserPostService {
    * GET /api/posts/user/posts
    */
   getUserPosts(): Observable<PostResponse[]> {
-    return this.http.get<PostResponse[]>(`${this.baseUrl}/user/posts`, { withCredentials: true })
+    return this.http.get<PostResponse[]>(`${this.baseUrl}/user/posts`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   /**
-   * Common error handler — adapt for toasts/logging as needed.
+   * Common error handler
    */
   private handleError(error: HttpErrorResponse) {
     // Customize error message for UI

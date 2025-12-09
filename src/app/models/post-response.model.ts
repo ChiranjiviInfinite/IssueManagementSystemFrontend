@@ -3,7 +3,7 @@ export interface PostResponse {
   title: string;
   description?: string;
   type: string;
-  status: string; // e.g. 'PENDING' | 'APPROVED'
+  status: string; 
   createdByUsername: string;
   assignedUpdate?: string | null;
   createdAt: string;

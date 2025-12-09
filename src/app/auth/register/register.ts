@@ -42,7 +42,7 @@ export class Register {
         this.loading.set(false);
         this.success.set("Registration successful! Redirecting to login…");
 
-        // Wait 1 second so user sees success message
+        // Waiting 1 second so user sees success message
         setTimeout(() => {
           this.router.navigate(['/']);
         }, 1200);
